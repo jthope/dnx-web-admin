@@ -1,0 +1,30 @@
+﻿@model Navigation.Menu
+
+@foreach (var item in Model.Items) {
+
+	var currentController = ViewContext.RouteData.Values["controller"].ToString();
+	var isActive = currentController == item.Controller ? "active" : string.Empty;
+
+	if (item.Children != null &&
+		item.Children.Count > 0) {
+
+		<li class="treeview @isActive">
+			<a href="#">
+				<i class="@item.IconCssClass"></i><span>@item.Name</span> <i class="fa fa-angle-left pull-right"></i>
+			</a>
+			<ul class="treeview-menu">
+				@await Component.InvokeAsync("Navigation", @item.Children)
+			</ul>
+		</li>
+
+	} else {
+
+		<li class="@isActive">
+			<a asp-controller="@item.Controller" asp-action="@item.Action">
+				<i class="@item.IconCssClass"></i> <span>@item.Name</span>
+			</a>
+		</li>
+
+	}
+
+}

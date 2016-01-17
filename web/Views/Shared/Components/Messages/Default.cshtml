@@ -1,0 +1,30 @@
+﻿@model Messages.Menu
+
+<li class="dropdown messages-menu">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		<i class="fa fa-envelope-o"></i>
+		<span class="label label-success">@Model.Items.Count</span>
+	</a>
+	<ul class="dropdown-menu">
+		<li class="header">You have @Model.Items.Count messages</li>
+		<li>
+			<ul class="menu">
+				@foreach (var item in Model.Items) {
+					<li>
+						<a href="#">
+							<div class="pull-left">
+								<img src="@item.ImageUrl" class="@item.CssClass" alt="User Image">
+							</div>
+							<h4>
+								@item.Title
+								<small><i class="fa fa-clock-o"></i> @item.Date.ToShortDateString()</small>
+							</h4>
+							<p>@item.Text</p>
+						</a>
+					</li>
+				}
+			</ul>
+		</li>
+		<li class="footer"><a href="#">See All Messages</a></li>
+	</ul>
+</li>
